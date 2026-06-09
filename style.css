@@ -56,10 +56,26 @@ a {
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
   font-family: var(--serif);
-  font-size: 22px;
+  font-size: 21px;
   font-weight: 700;
   letter-spacing: 0.08em;
+  color: var(--coffee);
+  white-space: nowrap;
+}
+
+.brand-icon {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  object-fit: contain;
+}
+
+.brand span {
+  padding-top: 1px;
 }
 
 .site-nav {
@@ -137,7 +153,8 @@ a {
 .catalog-cover,
 .image-link,
 .story-grid > img,
-.market-grid > img {
+.market-grid > img,
+.secondary-grid img {
   overflow: hidden;
   border: 1px solid var(--line-dark);
   background: var(--white);
@@ -248,6 +265,26 @@ p {
   line-height: 1.2;
 }
 
+.trust-strip {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  border-bottom: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+  background: var(--white);
+}
+
+.trust-strip span {
+  min-height: 96px;
+  display: flex;
+  align-items: center;
+  padding: 18px;
+  border-right: 1px solid var(--line);
+  color: var(--coffee);
+  font-family: var(--serif);
+  font-size: clamp(16px, 1.45vw, 21px);
+  line-height: 1.18;
+}
+
 .section {
   padding-top: var(--section);
   padding-bottom: var(--section);
@@ -275,21 +312,27 @@ p {
 }
 
 .image-link {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1.12;
   margin-bottom: 18px;
+  padding: 12px;
 }
 
 .image-link img {
-  aspect-ratio: 1 / 1.12;
-  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #f7f1e8;
 }
 
-.image-link.portrait img {
+.image-link.portrait {
   aspect-ratio: 1 / 1.22;
 }
 
-.feature-card .image-link img {
-  aspect-ratio: 1.38 / 1;
+.feature-card .image-link {
+  aspect-ratio: 1.08 / 1;
 }
 
 .collection-card h3 {
@@ -302,12 +345,112 @@ p {
   font-size: 15px;
 }
 
-.material-story,
+.collection-card .card-moq {
+  margin-top: 12px;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.text-button {
+  display: inline-flex;
+  margin-top: 12px;
+  border-bottom: 1px solid currentColor;
+  color: var(--copper);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.catalog-index {
+  padding-bottom: clamp(42px, 6vw, 84px);
+}
+
+.product-collection {
+  display: none;
+  padding: var(--section) var(--page);
+  border-bottom: 1px solid var(--line);
+  background: var(--ivory);
+}
+
+.product-collection:nth-of-type(even) {
+  background: var(--white);
+}
+
+.collection-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 0.75fr) minmax(320px, 0.78fr);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: start;
+  margin-bottom: clamp(28px, 5vw, 58px);
+}
+
+.collection-meta {
+  display: grid;
+  gap: 12px;
+  padding-top: 6px;
+}
+
+.collection-meta p {
+  margin: 0;
+  max-width: 720px;
+}
+
+.collection-meta strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.mini-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.mini-actions .button {
+  min-height: 42px;
+  padding: 10px 16px;
+  font-size: 12px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(14px, 2vw, 24px);
+}
+
+.product-grid a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  padding: 12px;
+  border: 1px solid var(--line);
+  background: #f7f1e8;
+}
+
+.product-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #f7f1e8;
+  transition: transform 220ms ease;
+}
+
+.product-grid a:hover img {
+  transform: scale(1.025);
+}
+
+.materials-section,
 .editorial-columns {
   background: var(--white);
 }
 
-.story-grid,
 .market-grid {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(320px, 0.62fr);
@@ -315,14 +458,37 @@ p {
   align-items: center;
 }
 
-.story-grid > img {
-  aspect-ratio: 1.15 / 1;
-  object-fit: cover;
+.material-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(18px, 2.5vw, 32px);
 }
 
-.story-copy p {
-  max-width: 560px;
-  font-size: 16px;
+.material-card {
+  min-width: 0;
+}
+
+.material-card img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  padding: 12px;
+  background: #f7f1e8;
+  margin-bottom: 18px;
+  border: 1px solid var(--line);
+}
+
+.material-card p {
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.material-card span {
+  display: block;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .why-grid {
@@ -354,16 +520,20 @@ p {
   object-fit: cover;
 }
 
-.showroom-copy {
+.showroom-gallery {
   display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(320px, 0.65fr);
-  gap: clamp(24px, 5vw, 70px);
-  align-items: start;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 2vw, 24px);
 }
 
-.showroom-copy p:not(.eyebrow) {
-  margin-top: 8px;
-  font-size: 16px;
+.showroom-gallery img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 0.78;
+  object-fit: contain;
+  padding: 10px;
+  border: 1px solid var(--line);
+  background: #f7f1e8;
 }
 
 .catalog-section {
@@ -382,18 +552,71 @@ p {
   font-size: 16px;
 }
 
+.section-logo {
+  width: 46px;
+  height: 46px;
+  margin: 0 0 24px;
+  object-fit: contain;
+}
+
 .catalog-cover img {
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1.68 / 1;
+  object-fit: contain;
+  padding: 12px;
+  background: #f7f1e8;
 }
 
 .market-grid > img {
+  width: 100%;
+  height: auto;
   aspect-ratio: 1.42 / 1;
-  object-fit: cover;
+  object-fit: contain;
+  padding: 12px;
+  background: #f7f1e8;
 }
 
 .market-grid h3 {
   max-width: 620px;
+}
+
+.secondary-gallery {
+  background: var(--ivory);
+}
+
+.secondary-gallery .section-title p:not(.eyebrow) {
+  max-width: 620px;
+  margin: 0;
+  color: var(--muted);
+}
+
+.secondary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(18px, 2.4vw, 34px);
+}
+
+.secondary-grid article {
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
+
+.secondary-grid img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1.08;
+  object-fit: contain;
+  padding: 12px;
+  background: #f7f1e8;
+}
+
+.secondary-grid h3 {
+  margin: 16px 0 0;
+  color: var(--coffee);
+  font-family: var(--serif);
+  font-size: clamp(18px, 1.6vw, 24px);
+  font-weight: 400;
 }
 
 .contact-grid {
@@ -442,6 +665,12 @@ p {
   margin: 0;
 }
 
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
 .site-footer a {
   color: var(--ink);
   border-bottom: 1px solid currentColor;
@@ -466,9 +695,17 @@ p {
 }
 
 @media (max-width: 1080px) {
+  .trust-strip,
   .collection-grid,
+  .product-grid,
+  .material-card-grid,
+  .secondary-grid,
   .why-grid,
   .contact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .showroom-gallery {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -505,8 +742,7 @@ p {
   }
 
   .hero,
-  .showroom-copy,
-  .story-grid,
+  .collection-heading,
   .catalog-section,
   .market-grid {
     grid-template-columns: 1fr;
@@ -528,6 +764,13 @@ p {
 
   .brand {
     font-size: 19px;
+    gap: 9px;
+  }
+
+  .brand-icon {
+    width: 34px;
+    height: 34px;
+    flex-basis: 34px;
   }
 
   .button-row {
@@ -539,12 +782,21 @@ p {
   }
 
   .collection-grid,
+  .product-grid,
+  .material-card-grid,
+  .secondary-grid,
+  .showroom-gallery,
   .why-grid,
   .contact-grid {
     grid-template-columns: 1fr;
   }
 
+  .mini-actions {
+    display: grid;
+  }
+
   .showroom-media img,
+  .showroom-gallery img,
   .market-grid > img {
     aspect-ratio: 1 / 1;
   }
@@ -554,18 +806,15 @@ p {
     align-items: flex-start;
   }
 
-  .whatsapp-float {
-    width: 54px;
-    min-width: 54px;
-    height: 54px;
-    min-height: 54px;
-    padding: 0;
-    border-radius: 50%;
-    font-size: 0;
+  .footer-brand {
+    align-items: flex-start;
   }
 
-  .whatsapp-float::before {
-    content: "WA";
-    font-size: 12px;
+  .whatsapp-float {
+    min-width: 154px;
+    height: 48px;
+    min-height: 48px;
+    padding: 0 16px;
+    font-size: 11px;
   }
 }
